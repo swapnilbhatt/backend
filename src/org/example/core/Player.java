@@ -1,9 +1,10 @@
 package org.example.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
-    public ArrayList<Card> hand;
+    public List<Card> hand;
 
     public Player() {
         hand = new ArrayList<>();

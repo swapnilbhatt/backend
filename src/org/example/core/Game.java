@@ -18,6 +18,14 @@ public class Game implements AutoCloseable {
         return player;
     }
 
+    public void removePlayer(Player player){
+        for(Card c: player.hand){
+            deck.unDealCard(c);
+        }
+
+        players.remove(player);
+    }
+
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -31,14 +39,21 @@ public class Game implements AutoCloseable {
         instance = null;
     }
 
-    public void dealCards(Player p, int noOfCards) {
-        int cnt = 0;
-        while(cnt<noOfCards){
-            dealCard(p);
-            cnt++;
+    public void dealCards(int noOfCards) {
+        for(Player player : players){
+            int cnt = 0;
+            while(cnt<noOfCards){
+                dealCard(player);
+                cnt++;
+            }
         }
     }
 
+    public void showHands() {
+        for (Player player : players) {
+            player.showHand();
+        }
+    }
     public void dealCard(Player p) {
         p.hand.add(deck.dealCard());
     }

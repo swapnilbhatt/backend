@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-    public List<Card> deck = new ArrayList<Card>();
-    public List<Card> delt = new ArrayList<Card>();
+    public List<Card> deck;
+    public List<Card> delt;
 
     public Deck() {
+        deck = new ArrayList<Card>();
+        delt = new ArrayList<Card>();
+
         for(int i = 1 ; i <= 13 ; i++){
             deck.add(new Card(i,Suite.CLUBS));
             deck.add(new Card(i,Suite.DIAMONDS));
@@ -22,5 +25,10 @@ public class Deck {
         deck.remove(c);
         delt.add(c);
         return c;
+    }
+
+    public void unDealCard(Card c){
+        deck.add(c);
+        delt.remove(c);
     }
 }
