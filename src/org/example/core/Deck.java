@@ -1,10 +1,11 @@
 package org.example.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Deck {
-    public ArrayList<Card> deck = new ArrayList<Card>();
-    public ArrayList<Card> delt = new ArrayList<Card>();
+    public List<Card> deck = new ArrayList<Card>();
+    public List<Card> delt = new ArrayList<Card>();
 
     public Deck() {
         for(int i = 1 ; i <= 13 ; i++){

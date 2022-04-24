@@ -3,17 +3,20 @@ package org.example;
 import org.example.core.Game;
 import org.example.core.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
-        Player p1 = new Player();
-        Player p2 = new Player();
         Game game = Game.getInstance();
-        for (int i= 0; i < 5; i++) {
-            game.dealCard(p1);
-            game.dealCard(p2);
-        }
+        Player p1 = game.addPlayer();
+        Player p2 = game.addPlayer();
+
+        game.dealCards(p1, 5);
+        game.dealCards(p2, 5);
+
         p1.showHand();
         p2.showHand();
-        game.printWinner(p1, p2);
+        game.printWinner();
     }
 }
