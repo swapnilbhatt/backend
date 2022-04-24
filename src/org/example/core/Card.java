@@ -1,8 +1,8 @@
 package org.example.core;
 
 public class Card {
-    public String suite;
-    public int value;
+    final public String suite;
+    final public int value;
     public Card(int value, String suite) {
         this.suite = suite;
         this.value = value;

@@ -3,21 +3,31 @@ package org.example.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements AutoCloseable {
-    List<Player> players;
+public class Game implements AutoCloseable, IGame {
+    private List<Player> players;
     private static Game instance;
     private Deck deck;
+
+    static Game getInstance() {
+        if (Game.instance == null) {
+            Game.instance = new Game();
+        }
+        return Game.instance;
+    }
+
     private Game() {
         deck = new Deck();
         players = new ArrayList<>();
     }
 
+    @Override
     public Player addPlayer(){
         Player player = new Player();
         players.add(player);
         return player;
     }
 
+    @Override
     public void removePlayer(Player player){
         for(Card c: player.hand){
             deck.unDealCard(c);
@@ -26,19 +36,13 @@ public class Game implements AutoCloseable {
         players.remove(player);
     }
 
-    public static Game getInstance() {
-        if (instance == null) {
-            instance = new Game();
-        }
-        return instance;
-    }
-
     @Override
     public void close() throws Exception {
         System.out.println("Cleaning up instance");
         instance = null;
     }
 
+    @Override
     public void dealCards(int noOfCards) {
         for(Player player : players){
             int cnt = 0;
@@ -49,15 +53,18 @@ public class Game implements AutoCloseable {
         }
     }
 
+    @Override
     public void showHands() {
         for (Player player : players) {
             player.showHand();
         }
     }
+    @Override
     public void dealCard(Player p) {
         p.hand.add(deck.dealCard());
     }
 
+    @Override
     public void printWinner() {
         int winner = getWinner(players);
 
@@ -67,6 +74,7 @@ public class Game implements AutoCloseable {
             System.out.println("It's a tie");
     }
 
+    @Override
     public int getWinner(List<Player> players) {
         int winner = -1;
         int maxCard = -1;

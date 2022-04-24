@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-    public List<Card> deck;
-    public List<Card> delt;
+    private List<Card> deck;
+    private List<Card> delt;
 
+    final int noOfCards;
     public Deck() {
-        deck = new ArrayList<Card>();
-        delt = new ArrayList<Card>();
+        deck = new ArrayList<>();
+        delt = new ArrayList<>();
+        noOfCards = 13;
 
-        for(int i = 1 ; i <= 13 ; i++){
-            deck.add(new Card(i,Suite.CLUBS));
-            deck.add(new Card(i,Suite.DIAMONDS));
-            deck.add(new Card(i,Suite.HEARTS));
-            deck.add(new Card(i,Suite.SPADE));
+        for(int i = 1 ; i <= noOfCards ; i++){
+            deck.add(new ClubCard(i));
+            deck.add(new DiamondCard(i));
+            deck.add(new HeartCard(i));
+            deck.add(new SpadeCard(i));
         }
     }
 
