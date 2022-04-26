@@ -26,3 +26,4 @@ When analyzing or implementing changes to the applications one should keep in mi
 4. Replaced duplicate code in game
 5. Allowed game to easily support more than 2 players
 6. Set fixed no of cards per player for a particular game
+7. Made changes to public properties, made them private and added getter and setter whenever required

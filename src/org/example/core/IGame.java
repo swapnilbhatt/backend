@@ -3,13 +3,6 @@ package org.example.core;
 import java.util.List;
 
 public interface IGame {
-
-
-    IPlayer addPlayer();
-
-    List<IPlayer> addPlayers(int noOfPlayers);
-    void removePlayer(IPlayer player);
-
     List<IPlayer> getPlayers();
 
     void dealCards();

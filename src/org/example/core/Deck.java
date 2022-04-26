@@ -3,7 +3,7 @@ package org.example.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Deck {
+public class Deck implements IDeck {
     private List<ICard> deck;
     private List<ICard> delt;
 
@@ -21,6 +21,7 @@ public class Deck {
         }
     }
 
+    @Override
     public ICard dealCard(){
         int rand = (int)(Math.random() * ((deck.size() - 1)));
         ICard c = deck.get(rand);
@@ -29,6 +30,7 @@ public class Deck {
         return c;
     }
 
+    @Override
     public void unDealCard(ICard c){
         deck.add(c);
         delt.remove(c);

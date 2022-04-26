@@ -3,24 +3,11 @@ package org.example.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements AutoCloseable, IGame {
+public class Game implements IGame {
     private List<IPlayer> players;
-  //  private static Game instance;
-    private Deck deck;
+    private IDeck deck;
 
     final int NO_OF_CARDS = 5;
-//    static Game getInstance() {
-//        if (Game.instance == null) {
-//            Game.instance = new Game();
-//        }
-//        return Game.instance;
-//    }
-
-
-    Game() {
-        deck = new Deck();
-        players = new ArrayList<>();
-    }
 
     Game(int noOfPlayers) throws InvalidPlayerCountException {
         if (noOfPlayers < 0 || noOfPlayers > 10)
@@ -36,15 +23,13 @@ public class Game implements AutoCloseable, IGame {
         return players;
     }
 
-    @Override
-    public IPlayer addPlayer() {
+    private IPlayer addPlayer() {
         IPlayer player = new Player();
         players.add(player);
         return player;
     }
 
-    @Override
-    public List<IPlayer> addPlayers(int playerCnt) {
+    private List<IPlayer> addPlayers(int playerCnt) {
         List<IPlayer> players = new ArrayList<>();
 
         for (int i = 0; i < playerCnt; i++) {
@@ -54,19 +39,12 @@ public class Game implements AutoCloseable, IGame {
         return players;
     }
 
-    @Override
-    public void removePlayer(IPlayer player) {
+    private void removePlayer(IPlayer player) {
         for (ICard c : player.getHand()) {
             deck.unDealCard(c);
         }
 
         players.remove(player);
-    }
-
-    @Override
-    public void close() throws Exception {
-        System.out.println("Cleaning up instance");
-      //  instance = null;
     }
 
     @Override
@@ -111,7 +89,8 @@ public class Game implements AutoCloseable, IGame {
             IPlayer player = players.get(i);
 
             for (int j = 0; j < player.getHand().size(); j++) {
-                ICard card = player.getHand().get(j);
+                List<ICard> hand = player.getHand();
+                ICard card = hand.get(j);
 
                 if (card.getValue() > maxCard) {
                     winner = i;
