@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-    private List<Card> deck;
-    private List<Card> delt;
+    private List<ICard> deck;
+    private List<ICard> delt;
 
     final int noOfCards;
     public Deck() {
@@ -21,15 +21,15 @@ public class Deck {
         }
     }
 
-    public Card dealCard(){
+    public ICard dealCard(){
         int rand = (int)(Math.random() * ((deck.size() - 1)));
-        Card c = deck.get(rand);
+        ICard c = deck.get(rand);
         deck.remove(c);
         delt.add(c);
         return c;
     }
 
-    public void unDealCard(Card c){
+    public void unDealCard(ICard c){
         deck.add(c);
         delt.remove(c);
     }

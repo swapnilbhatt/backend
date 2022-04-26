@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game implements AutoCloseable, IGame {
-    private List<Player> players;
-    private static Game instance;
+    private List<IPlayer> players;
+  //  private static Game instance;
     private Deck deck;
 
     final int NO_OF_CARDS = 5;
@@ -32,20 +32,20 @@ public class Game implements AutoCloseable, IGame {
     }
 
     @Override
-    public List<Player> getPlayers() {
+    public List<IPlayer> getPlayers() {
         return players;
     }
 
     @Override
-    public Player addPlayer() {
-        Player player = new Player();
+    public IPlayer addPlayer() {
+        IPlayer player = new Player();
         players.add(player);
         return player;
     }
 
     @Override
-    public List<Player> addPlayers(int playerCnt) {
-        List<Player> players = new ArrayList<>();
+    public List<IPlayer> addPlayers(int playerCnt) {
+        List<IPlayer> players = new ArrayList<>();
 
         for (int i = 0; i < playerCnt; i++) {
             players.add(addPlayer());
@@ -55,8 +55,8 @@ public class Game implements AutoCloseable, IGame {
     }
 
     @Override
-    public void removePlayer(Player player) {
-        for (Card c : player.hand) {
+    public void removePlayer(IPlayer player) {
+        for (ICard c : player.getHand()) {
             deck.unDealCard(c);
         }
 
@@ -66,12 +66,12 @@ public class Game implements AutoCloseable, IGame {
     @Override
     public void close() throws Exception {
         System.out.println("Cleaning up instance");
-        instance = null;
+      //  instance = null;
     }
 
     @Override
     public void dealCards() {
-        for (Player player : players) {
+        for (IPlayer player : players) {
             int cnt = 0;
             while (cnt < NO_OF_CARDS) {
                 dealCard(player);
@@ -82,14 +82,14 @@ public class Game implements AutoCloseable, IGame {
 
     @Override
     public void showHands() {
-        for (Player player : players) {
+        for (IPlayer player : players) {
             player.showHand();
         }
     }
 
     @Override
-    public void dealCard(Player p) {
-        p.hand.add(deck.dealCard());
+    public void dealCard(IPlayer p) {
+        p.addCardToHand(deck.dealCard());
     }
 
     @Override
@@ -97,25 +97,25 @@ public class Game implements AutoCloseable, IGame {
         int winner = getWinner(players);
 
         if (winner > 0)
-            System.out.println(String.format("Player %d wins", winner));
+            System.out.printf("Player %d wins%n", winner);
         else
             System.out.println("It's a tie");
     }
 
     @Override
-    public int getWinner(List<Player> players) {
+    public int getWinner(List<IPlayer> players) {
         int winner = -1;
         int maxCard = -1;
 
         for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
+            IPlayer player = players.get(i);
 
-            for (int j = 0; j < player.hand.size(); j++) {
-                Card card = player.hand.get(j);
+            for (int j = 0; j < player.getHand().size(); j++) {
+                ICard card = player.getHand().get(j);
 
-                if (card.value > maxCard) {
+                if (card.getValue() > maxCard) {
                     winner = i;
-                    maxCard = card.value;
+                    maxCard = card.getValue();
                 }
             }
         }

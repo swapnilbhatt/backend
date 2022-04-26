@@ -5,20 +5,20 @@ import java.util.List;
 public interface IGame {
 
 
-    Player addPlayer();
+    IPlayer addPlayer();
 
-    List<Player> addPlayers(int noOfPlayers);
-    void removePlayer(Player player);
+    List<IPlayer> addPlayers(int noOfPlayers);
+    void removePlayer(IPlayer player);
 
-    public List<Player> getPlayers();
+    List<IPlayer> getPlayers();
 
     void dealCards();
 
     void showHands();
 
-    void dealCard(Player p);
+    void dealCard(IPlayer p);
 
     void printWinner();
 
-    int getWinner(List<Player> players);
+    int getWinner(List<IPlayer> players);
 }
