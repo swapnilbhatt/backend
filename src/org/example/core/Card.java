@@ -2,17 +2,17 @@ package org.example.core;
 
 public class Card implements ICard {
     public String getSuite() {
-        return suite;
+        return suite.getSuit();
     }
 
     public int getValue() {
         return value;
     }
 
-    final private String suite;
+    final private Suite suite;
     final private int value;
 
-    public Card(int value, String suite) {
+    public Card(int value, Suite suite) {
         this.suite = suite;
         this.value = value;
     }

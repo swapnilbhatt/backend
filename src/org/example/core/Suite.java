@@ -1,9 +1,19 @@
 package org.example.core;
 
-public interface Suite {
-    String HEARTS = "H";
-    String SPADE = "S";
-    String CLUBS = "C";
-    String DIAMONDS = "D";
+public enum Suite {
+     HEARTS("H"),
+     SPADE("S"),
+     CLUBS("C"),
+     DIAMONDS("D");
+
+    private String suit;
+
+    public String getSuit() {
+        return suit;
+    }
+
+    Suite(String suit) {
+        this.suit = suit;
+    }
 }
 

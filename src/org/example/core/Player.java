@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player implements IPlayer {
     public List<ICard> getHand() {
-        return hand;
+        return new ArrayList<>(hand);
     }
 
     private List<ICard> hand;
