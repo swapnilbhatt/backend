@@ -5,12 +5,10 @@ import java.util.List;
 
 public class Deck implements IDeck {
     private List<ICard> deck;
-    private List<ICard> delt;
 
     final int noOfCards;
     public Deck() {
         deck = new ArrayList<>();
-        delt = new ArrayList<>();
         noOfCards = 13;
 
         for(int i = 1 ; i <= noOfCards ; i++){
@@ -26,13 +24,11 @@ public class Deck implements IDeck {
         int rand = (int)(Math.random() * ((deck.size() - 1)));
         ICard c = deck.get(rand);
         deck.remove(c);
-        delt.add(c);
         return c;
     }
 
     @Override
     public void unDealCard(ICard c){
         deck.add(c);
-        delt.remove(c);
     }
 }

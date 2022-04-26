@@ -9,7 +9,7 @@ public class Game implements IGame {
 
     final int NO_OF_CARDS = 5;
 
-    Game(int noOfPlayers) throws InvalidPlayerCountException {
+    public Game(int noOfPlayers) throws InvalidPlayerCountException {
         if (noOfPlayers < 0 || noOfPlayers > 10)
             throw new InvalidPlayerCountException("Invalid player counts");
 
