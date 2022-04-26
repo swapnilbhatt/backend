@@ -6,3 +6,4 @@ public interface Suite {
     String CLUBS = "C";
     String DIAMONDS = "D";
 }
+

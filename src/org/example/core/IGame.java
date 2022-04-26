@@ -7,9 +7,12 @@ public interface IGame {
 
     Player addPlayer();
 
+    List<Player> addPlayers(int noOfPlayers);
     void removePlayer(Player player);
 
-    void dealCards(int noOfCards);
+    public List<Player> getPlayers();
+
+    void dealCards();
 
     void showHands();
 

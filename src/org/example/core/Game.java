@@ -8,28 +8,55 @@ public class Game implements AutoCloseable, IGame {
     private static Game instance;
     private Deck deck;
 
-    static Game getInstance() {
-        if (Game.instance == null) {
-            Game.instance = new Game();
-        }
-        return Game.instance;
-    }
+    final int NO_OF_CARDS = 5;
+//    static Game getInstance() {
+//        if (Game.instance == null) {
+//            Game.instance = new Game();
+//        }
+//        return Game.instance;
+//    }
 
-    private Game() {
+
+    Game() {
         deck = new Deck();
         players = new ArrayList<>();
     }
 
+    Game(int noOfPlayers) throws InvalidPlayerCountException {
+        if (noOfPlayers < 0 || noOfPlayers > 10)
+            throw new InvalidPlayerCountException("Invalid player counts");
+
+        deck = new Deck();
+        players = new ArrayList<>();
+        players = addPlayers(noOfPlayers);
+    }
+
     @Override
-    public Player addPlayer(){
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    @Override
+    public Player addPlayer() {
         Player player = new Player();
         players.add(player);
         return player;
     }
 
     @Override
-    public void removePlayer(Player player){
-        for(Card c: player.hand){
+    public List<Player> addPlayers(int playerCnt) {
+        List<Player> players = new ArrayList<>();
+
+        for (int i = 0; i < playerCnt; i++) {
+            players.add(addPlayer());
+        }
+
+        return players;
+    }
+
+    @Override
+    public void removePlayer(Player player) {
+        for (Card c : player.hand) {
             deck.unDealCard(c);
         }
 
@@ -43,10 +70,10 @@ public class Game implements AutoCloseable, IGame {
     }
 
     @Override
-    public void dealCards(int noOfCards) {
-        for(Player player : players){
+    public void dealCards() {
+        for (Player player : players) {
             int cnt = 0;
-            while(cnt<noOfCards){
+            while (cnt < NO_OF_CARDS) {
                 dealCard(player);
                 cnt++;
             }
@@ -59,6 +86,7 @@ public class Game implements AutoCloseable, IGame {
             player.showHand();
         }
     }
+
     @Override
     public void dealCard(Player p) {
         p.hand.add(deck.dealCard());
